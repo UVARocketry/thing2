@@ -45,7 +45,7 @@ const s = (pi) => {
   }
   var altMode = false;
 
-  const emaConst = 0.01;
+  var emaConst = 0.01;
 
   pi.draw = function () {
     if (light) {
@@ -63,6 +63,11 @@ const s = (pi) => {
     }
     p.textSize(14);
     p.text("Click to change view mode", p.width / 2, 130);
+    p.text(
+      "click down here to change the ema constant",
+      p.width / 2,
+      p.height - 30,
+    );
     p.strokeWeight(3);
     var emaVal = cds[0];
     for (var i = 0; i < vels.length; i++) {
@@ -106,7 +111,13 @@ const s = (pi) => {
   };
   pi.mouseDragged = function () {};
   pi.mouseClicked = function () {
-    altMode = !altMode;
+    if (p.mouseY > p.height - 50) {
+      emaConst = window.prompt(
+        "Please give a value between 0 and 1 (current value " + emaConst + ")",
+      );
+    } else {
+      altMode = !altMode;
+    }
   };
   pi.mouseReleased = function () {};
 };
